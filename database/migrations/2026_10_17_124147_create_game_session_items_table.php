@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('game_session_items', function (Blueprint $table) {
             $table->foreignUuid('game_session_id')->unique()->constrained('game_sessions')->cascadeOnDelete();
-            $table->foreignId('item_id')->constrained('items')->cascadeOnDelete();
+            $table->foreignId('item_id')->unique()->constrained('items')->cascadeOnDelete();
             $table->timestamps();
         });
     }

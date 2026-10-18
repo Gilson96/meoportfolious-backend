@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('shop_id')->constrained('shops')->cascadeOnDelete();
-            $table->string('external_product_id');
-            $table->string('external_variant_id');
+            $table->foreignId('shop_id')->nullable()->constrained('shops')->cascadeOnDelete();
+            $table->string('external_variant_id')->nullable();
             $table->string('name');
             $table->string('type');
             $table->string('sprite_key');
