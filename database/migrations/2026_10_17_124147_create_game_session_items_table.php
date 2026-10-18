@@ -12,9 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('game_session_items', function (Blueprint $table) {
-            $table->foreignUuid('game_session_id')->unique()->constrained('game_sessions')->cascadeOnDelete();
-            $table->foreignId('item_id')->unique()->constrained('items')->cascadeOnDelete();
+            $table->foreignUuid('game_session_id')->constrained('game_sessions')->cascadeOnDelete();
+            $table->foreignId('item_id')->constrained('items')->cascadeOnDelete();
             $table->timestamps();
+
+            $table->unique(['game_session_id', 'item_id']);
         });
     }
 
