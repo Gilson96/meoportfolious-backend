@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Shop extends Model
 {
+    public $timestamps = false;
+
     protected $fillable = ['slug', 'provider', 'config'];
 
     public function items(): HasMany {

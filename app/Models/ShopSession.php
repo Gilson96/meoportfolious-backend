@@ -3,21 +3,29 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ShopSession extends Model
 {
-   protected $fillable = ['game_session_id', 'shop_id', 'expires_at', 'closed_at'];
+    public $timestamps = false;
 
-    public function gameSession(): BelongsToMany {
-        
-        return $this->belongsToMany(GameSession::class);
+    protected $fillable = ['game_session_id', 'shop_id', 'expires_at', 'closed_at'];
+
+    public function gameSession(): BelongsTo {
+            
+        return $this->belongsTo(GameSession::class);
     }
 
-    public function Shops(): BelongsToMany {
-        
-        return $this->belongsToMany(Shop::class);
+    public function shops(): BelongsTo {
+            
+        return $this->belongsTo(Shop::class);
     }
 
+    protected function casts(): array {
+        return [
+            'expires_at' => 'datetime',
+            'closed_at' => 'datetime'
+        ];
+    }
 
 }
