@@ -12,8 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->bigInteger('id')->primary();
+            $table->foreignId('shop_id')->constrained('shops');
+            $table->string('external_order_id');
+            $table->foreignUuid('game_session_id')->constrained('game_sessions')->nullOnDelete();
+            $table->foreignUuid('shop_session_id')->constrained('shop_sessions')->nullOnDelete();
+            $table->integer('total');
         });
     }
 

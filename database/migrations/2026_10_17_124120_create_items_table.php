@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('shop_id')->constrained('shops')->cascadeOnDelete();
+            $table->string('external_product_id');
+            $table->string('external_variant_id');
+            $table->string('name');
+            $table->string('type');
+            $table->string('sprite_key');
+            $table->boolean('active')->default(false);
         });
     }
 

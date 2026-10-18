@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('provider');
             $table->json('config')->nullable();
-            $table->timestamps();
         });
     }
 

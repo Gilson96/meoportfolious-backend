@@ -12,8 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('shop_sessions', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->uuid('id')->primary();
+            $table->foreignUuid('game_session_id')->constrained('game_sessions')->cascadeOnDelete();
+            $table->foreignId('shop_id')->constrained('shops');
+            $table->timestamp('expires_at');
+            $table->timestamp('closed_at')->nullable();            
         });
     }
 
