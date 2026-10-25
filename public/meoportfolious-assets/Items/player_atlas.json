@@ -1,0 +1,424 @@
+{
+    "frames": [
+        {
+            "filename": "east",
+            "frame": {
+                "w": 64,
+                "h": 64,
+                "x": 2,
+                "y": 2
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "north-east",
+            "frame": {
+                "w": 64,
+                "h": 64,
+                "x": 68,
+                "y": 2
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "north-west",
+            "frame": {
+                "w": 64,
+                "h": 64,
+                "x": 2,
+                "y": 68
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "west",
+            "frame": {
+                "w": 64,
+                "h": 64,
+                "x": 68,
+                "y": 68
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "north",
+            "frame": {
+                "w": 64,
+                "h": 64,
+                "x": 134,
+                "y": 2
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "south",
+            "frame": {
+                "w": 64,
+                "h": 64,
+                "x": 134,
+                "y": 68
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "south-east",
+            "frame": {
+                "w": 64,
+                "h": 64,
+                "x": 2,
+                "y": 134
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "south-west",
+            "frame": {
+                "w": 64,
+                "h": 64,
+                "x": 68,
+                "y": 134
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "east_frame_003",
+            "frame": {
+                "w": 64,
+                "h": 64,
+                "x": 134,
+                "y": 134
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "east_frame_000",
+            "frame": {
+                "w": 64,
+                "h": 64,
+                "x": 200,
+                "y": 2
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "east_frame_001",
+            "frame": {
+                "w": 64,
+                "h": 64,
+                "x": 200,
+                "y": 68
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "east_frame_004",
+            "frame": {
+                "w": 64,
+                "h": 64,
+                "x": 200,
+                "y": 134
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "east_frame_005",
+            "frame": {
+                "w": 64,
+                "h": 64,
+                "x": 2,
+                "y": 200
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "east_frame_002",
+            "frame": {
+                "w": 64,
+                "h": 64,
+                "x": 68,
+                "y": 200
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "north_frame_005",
+            "frame": {
+                "w": 64,
+                "h": 64,
+                "x": 134,
+                "y": 200
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "north_frame_003",
+            "frame": {
+                "w": 64,
+                "h": 64,
+                "x": 200,
+                "y": 200
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "north_frame_001",
+            "frame": {
+                "w": 64,
+                "h": 64,
+                "x": 266,
+                "y": 2
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "north_frame_004",
+            "frame": {
+                "w": 64,
+                "h": 64,
+                "x": 266,
+                "y": 68
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "north_frame_002",
+            "frame": {
+                "w": 64,
+                "h": 64,
+                "x": 266,
+                "y": 134
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "north_frame_000",
+            "frame": {
+                "w": 64,
+                "h": 64,
+                "x": 266,
+                "y": 200
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "south_frame_001",
+            "frame": {
+                "w": 64,
+                "h": 64,
+                "x": 2,
+                "y": 266
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "south_frame_005",
+            "frame": {
+                "w": 64,
+                "h": 64,
+                "x": 68,
+                "y": 266
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "south_frame_000",
+            "frame": {
+                "w": 64,
+                "h": 64,
+                "x": 134,
+                "y": 266
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "south_frame_004",
+            "frame": {
+                "w": 64,
+                "h": 64,
+                "x": 200,
+                "y": 266
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "south_frame_003",
+            "frame": {
+                "w": 64,
+                "h": 64,
+                "x": 266,
+                "y": 266
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "south_frame_002",
+            "frame": {
+                "w": 64,
+                "h": 64,
+                "x": 332,
+                "y": 2
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "west_frame_003",
+            "frame": {
+                "w": 64,
+                "h": 64,
+                "x": 332,
+                "y": 68
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "west_frame_005",
+            "frame": {
+                "w": 64,
+                "h": 64,
+                "x": 332,
+                "y": 134
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "west_frame_001",
+            "frame": {
+                "w": 64,
+                "h": 64,
+                "x": 332,
+                "y": 200
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "west_frame_004",
+            "frame": {
+                "w": 64,
+                "h": 64,
+                "x": 332,
+                "y": 266
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "west_frame_002",
+            "frame": {
+                "w": 64,
+                "h": 64,
+                "x": 2,
+                "y": 332
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "west_frame_000",
+            "frame": {
+                "w": 64,
+                "h": 64,
+                "x": 68,
+                "y": 332
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        }
+    ],
+    "meta": {
+        "description": "Atlas generado con Atlas Packer Gamma V2",
+        "web": "https://gammafp.github.io/atlas-packer-phaser/"
+    }
+}
