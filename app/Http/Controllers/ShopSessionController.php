@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Shop_session;
+use App\Models\ShopSession;
 use Illuminate\Http\Request;
 
 class ShopSessionController extends Controller
@@ -34,7 +34,7 @@ class ShopSessionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Shop_session $shop_session)
+    public function show(ShopSession $shop_session)
     {
         //
     }
@@ -42,7 +42,7 @@ class ShopSessionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Shop_session $shop_session)
+    public function edit(ShopSession $shop_session)
     {
         //
     }
@@ -50,7 +50,7 @@ class ShopSessionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Shop_session $shop_session)
+    public function update(Request $request, ShopSession $shop_session)
     {
         //
     }
@@ -58,7 +58,7 @@ class ShopSessionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Shop_session $shop_session)
+    public function destroy(ShopSession $shop_session)
     {
         //
     }
