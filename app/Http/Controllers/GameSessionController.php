@@ -2,64 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Game_session;
+use App\Models\GameSession;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class GameSessionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function create(Request $request): GameSession
     {
-        //
+        $validated = $request->validate([
+            'credits' => ['sometimes', 'integer', 'min:0'],
+            'expires_at' => ['required', 'date', 'after:now'],
+        ]);
+
+        $game_session = GameSession::create($validated);
+
+        return $game_session;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function destroy(GameSession $game_session): bool
     {
-        //
-    }
+        if (! $game_session->hasExpired()) {
+            return false;
+        }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        Session::forget('game_session_'.$game_session->id);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Game_session $game_session)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Game_session $game_session)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Game_session $game_session)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Game_session $game_session)
-    {
-        //
+        return true;
     }
 }
