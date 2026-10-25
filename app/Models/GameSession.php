@@ -2,14 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class GameSession extends Model
 {
-    protected $fillable = ['equipped_item_id', 'credits', 'expires_at', 'created_at', 'update_at'];
+    use HasUuids;
+
+    protected $fillable = ['credits', 'expires_at'];
 
     public function shopSessions(): HasMany
     {
@@ -18,16 +20,28 @@ class GameSession extends Model
 
     public function orders(): HasMany
     {
-        return $this->hasMany(Orders::class);
+        return $this->hasMany(Order::class);
     }
 
-    public function items(): BelongsToMany
+    public function inventory(): BelongsToMany
     {
-        return $this->belongsToMany(Item::class);
+        return $this->belongsToMany(Item::class, 'game_session_items')->withTimestamps();
     }
 
-    public function equippedItem(): BelongsTo
+    protected function casts(): array
     {
-        return $this->belongsToOne(GameSessionItem::class);
+        return [
+            'expires_at' => 'datetime',
+        ];
     }
+
+    public function hasExpired(): bool
+    {
+        return $this->expires_at->isPast();
+    }
+
+    // public function hasItems(): bool
+    // {
+    //     return $this->inventory()->exists();
+    // }
 }
