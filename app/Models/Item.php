@@ -10,7 +10,7 @@ class Item extends Model
 {
     public $timestamps = false;
 
-    protected $fillable = ['shop_id', 'external_variant_id', 'name', 'type', 'sprite_key', 'active'];
+    protected $fillable = ['shop_id', 'external_variant_id', 'sprite_key', 'textureURL', 'atlasURL', 'active'];
 
     public function shop(): BelongsTo
     {
