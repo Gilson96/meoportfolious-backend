@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('shop_id')->nullable()->constrained('shops')->cascadeOnDelete();
             $table->string('external_variant_id')->nullable();
-            $table->string('name');
-            $table->string('type');
             $table->string('sprite_key');
+            $table->string('textureURL');
+            $table->string('atlasURL');
             $table->boolean('active')->default(false);
         });
     }

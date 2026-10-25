@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('game_sessions', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignId('equipped_item_id')->nullable()->constrained('items')->nullOnDelete();
             $table->integer('credits')->default(0);
             $table->timestamp('expires_at');
             $table->timestamps();
