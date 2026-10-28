@@ -10,5 +10,9 @@ Route::post('/shop', [ShopController::class, 'create']);
 Route::get('/shop/{shop}', [ShopController::class, 'show']);
 Route::patch('/shop/{shop}', [ShopController::class, 'update']);
 
-Route::post('/game-session', [GameSessionController::class, 'create']);
+Route::prefix('game-session')->controller(GameSessionController::class)->group(function () {
+    Route::post('/', 'create');
+    Route::get('/{game_session}', 'show');
+});
+
 Route::get('/item/{item}', [ItemController::class, 'show']);
