@@ -4,29 +4,40 @@ namespace App\Http\Controllers;
 
 use App\Models\GameSession;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
 class GameSessionController extends Controller
 {
-    public function create(Request $request): GameSession
+    public function create(GameSession $game_session): GameSession
     {
-        $validated = $request->validate([
-            'credits' => ['sometimes', 'integer', 'min:0'],
-            'expires_at' => ['required', 'date', 'after:now'],
-        ]);
-
-        $game_session = GameSession::create($validated);
+        try {
+            $game_session = GameSession::create([
+                'credits' => GameSession::INITIAL_CREDITS,
+                'expires_at' => now()->addHour(),
+            ]);
+        } catch (\Exception $e) {
+            echo 'Caught exception: ', $e->getMessage(), "\n";
+        }
 
         return $game_session;
+    }
+
+    public function update(Request $request, GameSession $game_session)
+    {
+
+        if ($request['credits'] && is_int($request['credits']) ?? $request['credits'] > 0) {
+            $amount_spended = $request['credits'];
+
+            return $game_session->credits = $game_session->credits - $amount_spended;
+        }
+
+        return $game_session->credits;
     }
 
     public function destroy(GameSession $game_session): bool
     {
         if (! $game_session->hasExpired()) {
-            return false;
+            return $game_session->delete;
         }
-
-        Session::forget('game_session_'.$game_session->id);
 
         return true;
     }

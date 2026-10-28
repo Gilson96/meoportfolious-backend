@@ -11,7 +11,11 @@ class GameSession extends Model
 {
     use HasUuids;
 
+    public const INITIAL_CREDITS = 10000;
+
     protected $fillable = ['credits', 'expires_at'];
+
+    protected const INTIAL_CREDITS = 1000;
 
     public function shopSessions(): HasMany
     {
