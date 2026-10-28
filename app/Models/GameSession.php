@@ -15,8 +15,6 @@ class GameSession extends Model
 
     protected $fillable = ['credits', 'expires_at'];
 
-    protected const INTIAL_CREDITS = 1000;
-
     public function shopSessions(): HasMany
     {
         return $this->hasMany(ShopSession::class);
