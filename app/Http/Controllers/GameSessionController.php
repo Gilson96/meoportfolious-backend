@@ -29,7 +29,7 @@ class GameSessionController extends Controller
 
     public function show(GameSession $game_session): GameSession
     {
-        return $game_session;
+        return $game_session->load('inventory');
     }
 
     public function update(Request $request, GameSession $game_session): int
