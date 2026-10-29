@@ -18,9 +18,6 @@ class ShopController extends Controller
 
     public function show(Request $request, Shop $shop)
     {
-        $request->session()->all();
-        dd($request);
-
         return $shop;
     }
 
