@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->bigInteger('id')->primary();
+            $table->id();
             $table->foreignId('shop_id')->constrained('shops');
             $table->string('external_order_id');
             $table->foreignUuid('game_session_id')->constrained('game_sessions')->nullOnDelete();
