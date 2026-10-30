@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GameSession;
+use App\Models\Shop;
 use App\Models\ShopSession;
 use Illuminate\Http\Request;
 
@@ -15,12 +17,20 @@ class ShopSessionController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function create(ShopSession $shop_session, Shop $shop): ShopSession
     {
-        //
+        try {
+            $shop_session = ShopSession::create([
+                'game_session_id' => app(GameSession::class)->id,
+                'shop_id' => $shop->id,
+                'expires_at' => now()->addHour(),
+            ]);
+
+        } catch (\Exception $e) {
+            echo 'Caught exception: ', $e->getMessage(), "\n";
+        }
+
+        return $shop_session;
     }
 
     /**
