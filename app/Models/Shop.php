@@ -9,14 +9,18 @@ class Shop extends Model
 {
     public $timestamps = false;
 
-    protected $fillable = ['slug', 'provider', 'config'];
+    protected $fillable = ['shop_link', 'password', 'sprite_key', 'textureURL', 'atlasURL', 'provider', 'config'];
 
-    public function items(): HasMany {
+    protected $hidden = ['password'];
+
+    public function items(): HasMany
+    {
 
         return $this->hasMany(Item::class);
     }
 
-    public function shopSessions(): HasMany {
+    public function shopSessions(): HasMany
+    {
 
         return $this->hasMany(ShopSession::class);
     }
@@ -25,7 +29,7 @@ class Shop extends Model
     {
         return [
             'config' => 'array',
+            'password' => 'encrypted',
         ];
     }
-
 }
