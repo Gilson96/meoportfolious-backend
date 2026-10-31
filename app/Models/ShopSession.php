@@ -20,7 +20,7 @@ class ShopSession extends Model
         return $this->belongsTo(GameSession::class);
     }
 
-    public function shops(): BelongsTo
+    public function shop(): BelongsTo
     {
 
         return $this->belongsTo(Shop::class);
