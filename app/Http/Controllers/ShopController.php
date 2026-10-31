@@ -3,35 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Shop;
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Collection;
 
 class ShopController extends Controller
 {
-    public function create(Request $request, Shop $shop)
+    public function index(): Collection
     {
-        return $shop->create([
-            'slug' => request('slug'),
-            'provider' => request('provider'),
-            'config' => request('config'),
-        ]);
+        return Shop::all();
     }
 
-    public function show(Request $request, Shop $shop)
+    public function show(Shop $shop): Shop
     {
         return $shop;
-    }
-
-    public function update(Request $request, Shop $shop)
-    {
-        return $shop->update([
-            'slug' => request('slug'),
-            'provider' => request('provider'),
-            'config' => request('config'),
-        ]);
-    }
-
-    public function destroy(Shop $shop)
-    {
-        return $shop->delete();
     }
 }
