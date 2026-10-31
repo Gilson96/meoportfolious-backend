@@ -2,18 +2,23 @@
 
 use App\Http\Controllers\GameSessionController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ShopSessionController;
 use App\Http\Middleware\ResolveGameSession;
 use App\Http\Middleware\ResolveShopSession;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('shop-session')->controller(ShopSessionController::class)->group(function () {
-    Route::post('/shop', [ShopSessionController::class, 'create']);
+Route::prefix('shop')->group(function () {
+    Route::get('/', [ShopController::class, 'index']);
+    Route::get('/{shop}', [ShopController::class, 'show']);
 
+    Route::post('/{shop}/session', [ShopSessionController::class, 'create'])->middleware(ResolveGameSession::class);
+});
+
+Route::prefix('shop-session')->controller(ShopSessionController::class)->group(function () {
     Route::middleware(ResolveShopSession::class)->group(function () {
-        Route::get('/shop', [ShopSessionController::class, 'index']);
-        Route::get('/shop/{shop}', [ShopSessionController::class, 'show']);
-        Route::patch('/shop/{shop}', [ShopSessionController::class, 'update']);
+        Route::get('/', 'show');
+        Route::delete('/', 'destroy');
     });
 });
 
