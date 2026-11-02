@@ -9,9 +9,7 @@ class Shop extends Model
 {
     public $timestamps = false;
 
-    protected $fillable = ['shop_link', 'password', 'sprite_key', 'textureURL', 'atlasURL', 'provider', 'config'];
-
-    protected $hidden = ['password'];
+    protected $fillable = ['config'];
 
     public function items(): HasMany
     {
@@ -29,7 +27,6 @@ class Shop extends Model
     {
         return [
             'config' => 'array',
-            'password' => 'encrypted',
         ];
     }
 }
