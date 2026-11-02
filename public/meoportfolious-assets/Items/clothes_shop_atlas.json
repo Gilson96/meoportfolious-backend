@@ -1,19 +1,37 @@
 {
   "frames": {
-    "clothes_shop": {
-      "frame": { "x": 0, "y": 0, "w": 96, "h": 96 },
+    "market": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 165,
+        "h": 165
+      },
       "rotated": false,
       "trimmed": false,
-      "spriteSourceSize": { "x": 0, "y": 0, "w": 96, "h": 96 },
-      "sourceSize": { "w": 96, "h": 96 }
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 165,
+        "h": 165
+      },
+      "sourceSize": {
+        "w": 165,
+        "h": 165
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1.0
+      }
     }
   },
   "meta": {
-    "app": "manual",
-    "version": "1.0",
-    "image": "clothes_shop.png",
+    "image": "market.png",
     "format": "RGBA8888",
-    "size": { "w": 96, "h": 96 },
+    "size": {
+      "w": 165,
+      "h": 165
+    },
     "scale": "1"
   }
 }

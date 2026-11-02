@@ -1,0 +1,37 @@
+{
+  "frames": {
+    "my-house": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 216,
+        "h": 210
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 216,
+        "h": 210
+      },
+      "sourceSize": {
+        "w": 216,
+        "h": 210
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1.0
+      }
+    }
+  },
+  "meta": {
+    "image": "my-house.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 216,
+      "h": 210
+    },
+    "scale": "1"
+  }
+}
