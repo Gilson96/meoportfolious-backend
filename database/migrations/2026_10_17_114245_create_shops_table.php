@@ -13,9 +13,7 @@ return new class extends Migration
     {
         Schema::create('shops', function (Blueprint $table) {
             $table->id();
-            $table->string('slug')->unique();
-            $table->string('provider');
-            $table->json('config')->nullable();
+            $table->json('config');
         });
     }
 
