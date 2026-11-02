@@ -15,8 +15,8 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('game_session_id')->constrained('game_sessions')->cascadeOnDelete();
             $table->foreignId('shop_id')->constrained('shops');
-            $table->timestamp('expires_at');
-            $table->timestamp('closed_at')->nullable();            
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('closed_at')->nullable();
         });
     }
 
