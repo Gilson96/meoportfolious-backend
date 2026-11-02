@@ -20,7 +20,7 @@ class ShopSeeder extends Seeder
                 'provider' => 'react',
                 'shop_link' => 'https://wheretoknowaboutme.netlify.app/',
                 'password' => null,
-                'position' => ['x' => 550, 'y' => 160],
+                'position' => ['x' => 550, 'y' => 120],
             ],
         ]);
 
