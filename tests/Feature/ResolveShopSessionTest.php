@@ -20,9 +20,12 @@ beforeEach(function () {
     ]);
 
     $shop = Shop::create([
-        'slug' => 'test-shop',
-        'provider' => 'test',
-        'config' => [],
+        'config' => [
+            'sprite_key' => 'test-shop',
+            'textureURL' => 'https://example.com/test-shop.png',
+            'atlasURL' => 'https://example.com/test-shop.json',
+            'provider' => 'test',
+        ],
     ]);
 
     $this->shopSession = ShopSession::create([
