@@ -12,7 +12,7 @@ class ShopSession extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['game_session_id', 'shop_id', 'expires_at', 'closed_at'];
+    protected $fillable = ['game_session_id', 'shop_id', 'created_at', 'closed_at'];
 
     public function gameSession(): BelongsTo
     {
@@ -29,13 +29,13 @@ class ShopSession extends Model
     protected function casts(): array
     {
         return [
-            'expires_at' => 'datetime',
+            'created_at' => 'datetime',
             'closed_at' => 'datetime',
         ];
     }
 
     public function hasExpired(): bool
     {
-        return $this->closed_at !== null || $this->expires_at->isPast();
+        return $this->closed_at !== null;
     }
 }
