@@ -8,7 +8,7 @@ use Illuminate\Database\Seeder;
 class ShopSeeder extends Seeder
 {
     /**
-     * Seed the shops. Created in id order so auto-increment yields 1, 2 and 3.
+     * Seed the shops. Created in id order so auto-increment yields 1, 2, 3 and 4.
      */
     public function run(): void
     {
@@ -45,6 +45,18 @@ class ShopSeeder extends Seeder
                 'shop_link' => 'https://mernfoods.netlify.app/',
                 'password' => null,
                 'position' => ['x' => 840, 'y' => 200],
+            ],
+        ]);
+
+        Shop::create([
+            'config' => [
+                'sprite_key' => 'pet_shop',
+                'textureURL' => '/meoportfolious-assets/Items/pet_shop.png',
+                'atlasURL' => '/meoportfolious-assets/Items/pet_shop_atlas.json',
+                'provider' => 'react',
+                'shop_link' => null,
+                'password' => null,
+                'position' => ['x' => 550, 'y' => 450],
             ],
         ]);
     }
