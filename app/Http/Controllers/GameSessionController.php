@@ -43,6 +43,16 @@ class GameSessionController extends Controller
         return $game_session->credits;
     }
 
+    // public function calculateCredit(Request $request, GameSession $game_session): int
+    // {
+    //     $validated = $request->validate([
+    //         'credits' => ['integer', 'min:1', 'max:'.$game_session->credits],
+    //     ]);
+
+
+    //     return $newcredit;
+    // }
+
     // public function destroy(GameSession $game_session): bool
     // {
     //     if (! $game_session->hasExpired()) {
