@@ -11,7 +11,7 @@ class GameSession extends Model
 {
     use HasUuids;
 
-    public const INITIAL_CREDITS = 10000;
+    public const INITIAL_CREDITS = 1000;
 
     protected $fillable = ['credits', 'expires_at'];
 
