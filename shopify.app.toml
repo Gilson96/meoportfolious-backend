@@ -1,0 +1,19 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "f402d7cf1e057532f1941ed56fcd0baa"
+application_url = "https://manual-improper-cottage.ngrok-free.dev/shopify/auth"
+embedded = false
+name = "meoportfolious-app-2"
+
+[webhooks]
+api_version = "2026-10"
+
+[access_scopes]
+
+scopes = "read_products,write_products,read_customers,read_orders,read_fulfillments,read_script_tags,write_script_tags,read_shipping,read_themes,write_themes,read_price_rules,write_price_rules,read_metaobjects"
+use_legacy_install_flow = false
+
+[auth]
+redirect_urls = [
+  "https://manual-improper-cottage.ngrok-free.dev/shopify/auth-redirect"
+]
