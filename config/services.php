@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'shopify' => [
+        'client_id' => env('SHOPIFY_CLIENT_ID'),
+        'secret' => env('SHOPIFY_OLD_SECRET'),
+        'scopes' => 'read_products,write_products,read_customers,read_orders,read_fulfillments,read_script_tags,write_script_tags,read_shipping,read_themes,write_themes,read_price_rules,write_price_rules,read_metaobjects',
+    ],
 ];
