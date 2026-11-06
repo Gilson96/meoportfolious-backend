@@ -3,7 +3,6 @@
 use App\Http\Controllers\GameSessionController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ShopController;
-use App\Http\Controllers\ShopifyController;
 use App\Http\Controllers\ShopSessionController;
 use App\Http\Middleware\ResolveGameSession;
 use App\Http\Middleware\ResolveShopSession;
@@ -33,5 +32,3 @@ Route::prefix('game-session')->controller(GameSessionController::class)->group(f
 });
 
 Route::get('/item/{item}', [ItemController::class, 'show']);
-Route::get('shopify/auth', [ShopifyController::class, 'getAuth']);
-Route::any('shopify/auth-redirect', [ShopifyController::class, 'authRedirect']);
