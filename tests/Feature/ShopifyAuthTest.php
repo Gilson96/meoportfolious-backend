@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ShopifyController;
+use App\Models\Shop;
 use App\Models\ShopifyInstall;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -86,6 +87,84 @@ test('callback exchanges the code and stores the install with an encrypted token
     expect($install->access_token)->toBe('shpat_plaintext_token')
         ->and($install->scopes)->toBe('read_products,write_products')
         ->and(DB::table('shopify_installs')->value('access_token'))->not->toBe('shpat_plaintext_token');
+});
+
+test('callback associates the install with the shop whose sprite key matches the domain', function () {
+    Http::fake([
+        'clothes-7kwlamyy.myshopify.com/admin/oauth/access_token' => Http::response([
+            'access_token' => 'shpat_plaintext_token',
+            'scope' => 'read_products',
+        ]),
+    ]);
+
+    $shoesShop = Shop::create(['config' => ['sprite_key' => 'shoes_shop']]);
+    $clothesShop = Shop::create(['config' => [
+        'sprite_key' => 'clothes_shop',
+        'provider' => 'shopify',
+        'shop_link' => 'https://old-store.myshopify.com/',
+    ]]);
+
+    $this->withSession([ShopifyController::STATE_SESSION_KEY => 'expected-state']);
+
+    $this->get('/shopify/auth-redirect?'.http_build_query(signShopifyParams([
+        'shop' => 'clothes-7kwlamyy.myshopify.com',
+        'code' => 'auth-code',
+        'state' => 'expected-state',
+        'timestamp' => '1700000000',
+    ])))->assertRedirect();
+
+    expect(ShopifyInstall::where('shop_domain', 'clothes-7kwlamyy.myshopify.com')->sole()->shop_id)
+        ->toBe($clothesShop->id)
+        ->and($clothesShop->fresh()->config)->toBe([
+            'sprite_key' => 'clothes_shop',
+            'provider' => 'shopify',
+            'shop_link' => 'https://clothes-7kwlamyy.myshopify.com/',
+        ])
+        ->and($shoesShop->fresh()->config)->toBe(['sprite_key' => 'shoes_shop']);
+});
+
+test('callback sets the shop link when the matched shop has none', function () {
+    Http::fake([
+        'clothes-7kwlamyy.myshopify.com/admin/oauth/access_token' => Http::response([
+            'access_token' => 'shpat_plaintext_token',
+            'scope' => 'read_products',
+        ]),
+    ]);
+
+    $clothesShop = Shop::create(['config' => ['sprite_key' => 'clothes_shop']]);
+
+    $this->withSession([ShopifyController::STATE_SESSION_KEY => 'expected-state']);
+
+    $this->get('/shopify/auth-redirect?'.http_build_query(signShopifyParams([
+        'shop' => 'clothes-7kwlamyy.myshopify.com',
+        'code' => 'auth-code',
+        'state' => 'expected-state',
+        'timestamp' => '1700000000',
+    ])))->assertRedirect();
+
+    expect($clothesShop->fresh()->config['shop_link'])->toBe('https://clothes-7kwlamyy.myshopify.com/');
+});
+
+test('callback leaves the install unassociated when no shop matches the domain', function () {
+    Http::fake([
+        'example-store.myshopify.com/admin/oauth/access_token' => Http::response([
+            'access_token' => 'shpat_plaintext_token',
+            'scope' => 'read_products',
+        ]),
+    ]);
+
+    Shop::create(['config' => ['sprite_key' => 'clothes_shop']]);
+
+    $this->withSession([ShopifyController::STATE_SESSION_KEY => 'expected-state']);
+
+    $this->get('/shopify/auth-redirect?'.http_build_query(signShopifyParams([
+        'shop' => 'example-store.myshopify.com',
+        'code' => 'auth-code',
+        'state' => 'expected-state',
+        'timestamp' => '1700000000',
+    ])))->assertRedirect();
+
+    expect(ShopifyInstall::where('shop_domain', 'example-store.myshopify.com')->sole()->shop_id)->toBeNull();
 });
 
 test('callback rejects a mismatched state and stores nothing', function () {
