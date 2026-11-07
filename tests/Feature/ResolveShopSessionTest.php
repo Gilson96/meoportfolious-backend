@@ -5,6 +5,7 @@ use App\Http\Middleware\ResolveShopSession;
 use App\Models\GameSession;
 use App\Models\Shop;
 use App\Models\ShopSession;
+use Database\Factories\ShopifyInstallFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
@@ -40,6 +41,22 @@ test('shop session routes accept a shop session belonging to the game session', 
         ResolveGameSession::HEADER => $this->gameSession->id,
         ResolveShopSession::HEADER => $this->shopSession->id,
     ])->getJson('/test-shop-session')->assertOk();
+});
+
+test('shop session routes accept the shopify header when the shop is linked with shopify', function () {
+    ShopifyInstallFactory::new()->create(['shop_id' => $this->shopSession->shop_id]);
+
+    $this->withHeaders([
+        ResolveGameSession::HEADER => $this->gameSession->id,
+        ResolveShopSession::SHOPIFY_HEADER => $this->shopSession->id,
+    ])->getJson('/test-shop-session')->assertOk();
+});
+
+test('shop session routes reject the shopify header when the shop is not linked with shopify', function () {
+    $this->withHeaders([
+        ResolveGameSession::HEADER => $this->gameSession->id,
+        ResolveShopSession::SHOPIFY_HEADER => $this->shopSession->id,
+    ])->getJson('/test-shop-session')->assertForbidden();
 });
 
 test('shop session routes reject a shop session that belongs to another game session', function () {
