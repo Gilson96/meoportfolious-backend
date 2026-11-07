@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Shop extends Model
 {
@@ -21,6 +22,11 @@ class Shop extends Model
     {
 
         return $this->hasMany(ShopSession::class);
+    }
+
+    public function shopifyInstall(): HasOne
+    {
+        return $this->hasOne(ShopifyInstall::class);
     }
 
     protected function casts(): array
