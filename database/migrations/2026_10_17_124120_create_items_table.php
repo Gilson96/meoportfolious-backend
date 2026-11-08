@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('textureURL');
             $table->string('atlasURL');
             $table->boolean('active')->default(false);
+            $table->unique(['shop_id', 'sprite_key']);
         });
     }
 
