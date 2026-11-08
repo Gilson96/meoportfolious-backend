@@ -6,6 +6,7 @@ use App\Models\GameSession;
 use App\Models\Shop;
 use App\Models\ShopSession;
 use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 
 class ShopSessionController extends Controller
 {
@@ -28,5 +29,10 @@ class ShopSessionController extends Controller
         $shop_session->update(['closed_at' => now()]);
 
         return response()->noContent();
+    }
+
+    public function shopSessionOrders(Request $request)
+    {
+        
     }
 }
