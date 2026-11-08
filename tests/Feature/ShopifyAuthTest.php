@@ -47,6 +47,58 @@ test('install redirects to the shop authorize page with a state nonce', function
         ->and($query['state'])->toBe(session(ShopifyController::STATE_SESSION_KEY));
 });
 
+test('install shows the top product on the welcome page when the shop is already installed', function () {
+    $shop = Shop::create(['config' => ['sprite_key' => 'shoes_shop']]);
+    ShopifyInstall::factory()->for($shop)->create(['shop_domain' => 'shoes.myshopify.com']);
+
+    Http::fake([
+        'shoes.myshopify.com/*' => Http::response(['data' => ['products' => ['edges' => [
+            ['node' => ['id' => 'gid://shopify/Product/123', 'title' => 'Red Sneakers']],
+        ]]]]),
+    ]);
+
+    $this->get('/shopify/auth?'.http_build_query(signShopifyParams([
+        'shop' => 'shoes.myshopify.com',
+        'timestamp' => '1700000000',
+    ])))
+        ->assertOk()
+        ->assertViewIs('welcome')
+        ->assertViewHas('product', ['id' => 'gid://shopify/Product/123', 'title' => 'Red Sneakers'])
+        ->assertSee('Red Sneakers');
+});
+
+test('install shows the welcome page without a product when the store has none', function () {
+    $shop = Shop::create(['config' => ['sprite_key' => 'shoes_shop']]);
+    ShopifyInstall::factory()->for($shop)->create(['shop_domain' => 'shoes.myshopify.com']);
+
+    Http::fake([
+        'shoes.myshopify.com/*' => Http::response(['data' => ['products' => ['edges' => []]]]),
+    ]);
+
+    $this->get('/shopify/auth?'.http_build_query(signShopifyParams([
+        'shop' => 'shoes.myshopify.com',
+        'timestamp' => '1700000000',
+    ])))
+        ->assertOk()
+        ->assertViewHas('product', null)
+        ->assertSee('No products found in shoes.myshopify.com.');
+});
+
+test('install shows the welcome page without calling shopify when the install has no shop', function () {
+    ShopifyInstall::factory()->create(['shop_domain' => 'shoes.myshopify.com']);
+
+    Http::fake();
+
+    $this->get('/shopify/auth?'.http_build_query(signShopifyParams([
+        'shop' => 'shoes.myshopify.com',
+        'timestamp' => '1700000000',
+    ])))
+        ->assertOk()
+        ->assertViewHas('product', null);
+
+    Http::assertNothingSent();
+});
+
 test('install rejects a request with a bad signature', function () {
     $params = signShopifyParams(['shop' => 'example-store.myshopify.com', 'timestamp' => '1700000000']);
     $params['hmac'] = 'tampered';
