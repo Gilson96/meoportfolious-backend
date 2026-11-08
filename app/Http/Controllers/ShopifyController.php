@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
+use RuntimeException;
 
 class ShopifyController extends Controller
 {
@@ -22,8 +23,12 @@ class ShopifyController extends Controller
             abort(403);
         }
 
-        if (ShopifyInstall::query()->where('shop_domain', $shopDomain)->exists()) {
-            return view('welcome', ['shopDomain' => $shopDomain]);
+        $install = ShopifyInstall::query()->with('shop')->where('shop_domain', $shopDomain)->first();
+
+        if ($install !== null) {
+            return view('welcome', [
+                'shopDomain' => $shopDomain,
+            ]);
         }
 
         $state = Str::random(40);
@@ -37,7 +42,7 @@ class ShopifyController extends Controller
         ]));
     }
 
-    public function authRedirect(Request $request): RedirectResponse
+    public function authRedirect(Request $request, ShopifyActionsController $shopifyActions): RedirectResponse
     {
         $shopDomain = $request->query('shop');
         $expectedState = $request->session()->pull(self::STATE_SESSION_KEY);
@@ -66,7 +71,9 @@ class ShopifyController extends Controller
         if ($shop !== null) {
             $install->shop()->associate($shop)->save();
             $shop->config = [...$shop->config, 'shop_link' => 'https://'.$shopDomain.'/'];
-            $shop->save();
+            $shop->save(); 
+
+            $shopifyActions->setupWebhooks(deleteFirst:true);
         }
 
         return redirect($this->shopAppUrl($shopDomain));
