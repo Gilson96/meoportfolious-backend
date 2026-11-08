@@ -2,11 +2,14 @@
 
 use App\Http\Controllers\GameSessionController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\ShopifyActionsController;
 use App\Http\Controllers\ShopSessionController;
 use App\Http\Middleware\ResolveGameSession;
 use App\Http\Middleware\ResolveShopSession;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ShopifyController;
 
 Route::prefix('shop')->group(function () {
     Route::get('/', [ShopController::class, 'index']);
@@ -21,6 +24,9 @@ Route::prefix('shop-session')->controller(ShopSessionController::class)->group(f
         Route::delete('/', 'destroy');
     });
 });
+
+Route::post('shopify/order_create', [OrderController::class, 'shopifyOrder'])
+    ->name('shopify.order_create');
 
 Route::prefix('game-session')->controller(GameSessionController::class)->group(function () {
     Route::post('/', 'create');
