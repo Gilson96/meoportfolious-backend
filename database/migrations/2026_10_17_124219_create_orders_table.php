@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('shop_id')->constrained('shops');
-            $table->string('external_order_id');
+            $table->string('external_order_id')->unique();
             $table->foreignUuid('game_session_id')->constrained('game_sessions')->nullOnDelete();
             $table->foreignUuid('shop_session_id')->constrained('shop_sessions')->nullOnDelete();
             $table->integer('total');
+            $table->json('payload');
+            $table->timestamps();
         });
     }
 
