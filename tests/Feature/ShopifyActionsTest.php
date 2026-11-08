@@ -50,3 +50,32 @@ test('graphQl returns null without calling shopify when the shop has no install'
 
     Http::assertNothingSent();
 });
+
+test('getProduct returns the id and title of the product with the most inventory', function () {
+    $shop = Shop::create(['config' => ['sprite_key' => 'shoes_shop']]);
+    ShopifyInstall::factory()->for($shop)->create();
+
+    Http::fake([
+        '*' => Http::response(['data' => ['products' => ['edges' => [
+            ['node' => ['id' => 'gid://shopify/Product/123', 'title' => 'Red Sneakers']],
+        ]]]]),
+    ]);
+
+    expect((new ShopifyActionsController)->getProduct($shop))->toBe([
+        'id' => 'gid://shopify/Product/123',
+        'title' => 'Red Sneakers',
+    ]);
+
+    Http::assertSent(fn (Request $request) => str_contains($request['query'], 'sortKey: INVENTORY_TOTAL, reverse: true'));
+});
+
+test('getProduct throws when the store has no products', function () {
+    $shop = Shop::create(['config' => ['sprite_key' => 'shoes_shop']]);
+    ShopifyInstall::factory()->for($shop)->create();
+
+    Http::fake([
+        '*' => Http::response(['data' => ['products' => ['edges' => []]]]),
+    ]);
+
+    (new ShopifyActionsController)->getProduct($shop);
+})->throws(RuntimeException::class, 'No products found in store');
